@@ -8,15 +8,16 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountsItem from '~/components/AccountItem';
+import Button from '~/components/Button';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
-console.log(cx);
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
-  useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([]);
-    }, 0);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setSearchResult([]);
+  //   }, 0);
+  // });
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -49,7 +50,12 @@ function Header() {
             </button>
           </div>
         </Tippy>
-        <div className={cx('actions')}>{/* actions */}</div>
+        <div className={cx('actions')}>
+          <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+            Upload
+          </Button>
+          <Button primary>Log in</Button>
+        </div>
       </div>
     </header>
   );
