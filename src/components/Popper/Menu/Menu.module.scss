@@ -1,0 +1,20 @@
+// Menu wrapper
+.menu-list {
+  width: 224px;
+  .menu-item {
+    display: block;
+    width: 100%;
+    text-align: start;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    margin-left: 0;
+    border-radius: 0;
+    &:hover {
+      background-color: rgba(22, 24, 35, 0.03);
+    }
+  }
+}
+
+.menu-popper {
+  padding-bottom: 8px;
+}
