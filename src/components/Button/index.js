@@ -25,7 +25,7 @@ function Button({
     });
   }
   if (passProps.to) {
-    Comp = 'Link';
+    Comp = Link;
   } else if (passProps.href) {
     Comp = 'a';
   }
