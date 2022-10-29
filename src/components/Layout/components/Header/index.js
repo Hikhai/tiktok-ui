@@ -1,20 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCircleQuestion,
-  faCircleXmark,
-  faEarthAfrica,
-  faEllipsisVertical,
-  faKeyboard,
-  faMagnifyingGlass,
-  faSpinner,
-  faPlus,
-  faGear,
-  faVideo,
-  faUser,
-  faRightToBracket,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faEllipsisVertical, faSpinner, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import TippyHeadless from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
@@ -23,13 +10,24 @@ import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountsItem from '~/components/AccountItem';
 import Button from '~/components/Button';
-import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import Menu from '~/components/Popper/Menu';
-import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import Image from '~/components/Image';
+import {
+  HeaderProfileIcon,
+  MessageIcon,
+  HeaderSearchIcon,
+  HeaderTiktokIcon,
+  HeaderMovieIcon,
+  HeaderSettingIcon,
+  HeaderLogoutIcon,
+  HeaderLangueIcon,
+  HeaderQuestionIcon,
+  HeaderBoardIcon,
+} from '~/components/icons';
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
   {
-    icon: <FontAwesomeIcon icon={faEarthAfrica} />,
+    icon: <HeaderLangueIcon width="2rem" height="2rem" />,
     title: 'English',
     children: {
       title: 'Language',
@@ -48,12 +46,12 @@ const MENU_ITEMS = [
     },
   },
   {
-    icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+    icon: <HeaderQuestionIcon width="2rem" height="2rem" />,
     title: 'Feedback and help',
     to: '/feedback',
   },
   {
-    icon: <FontAwesomeIcon icon={faKeyboard} />,
+    icon: <HeaderBoardIcon width="2rem" height="2rem" />,
     title: 'Keyboard shortcuts',
   },
 ];
@@ -77,28 +75,28 @@ function Header() {
 
   const userMenu = [
     {
-      icon: <FontAwesomeIcon icon={faUser} />,
+      icon: <HeaderProfileIcon width="2rem" height="2rem" />,
       title: 'View profile',
       to: '/@hoaa',
     },
     {
-      icon: <FontAwesomeIcon icon={faTiktok} />,
+      icon: <HeaderTiktokIcon width="2rem" height="2rem" />,
       title: 'Get coins',
       to: '/coin',
     },
     {
-      icon: <FontAwesomeIcon icon={faVideo} />,
+      icon: <HeaderMovieIcon width="2rem" height="2rem" />,
       title: 'LIVE Studio',
       to: '/studio',
     },
     {
-      icon: <FontAwesomeIcon icon={faGear} />,
+      icon: <HeaderSettingIcon width="2rem" height="2rem" />,
       title: 'Settings',
       to: '/setting',
     },
     ...MENU_ITEMS,
     {
-      icon: <FontAwesomeIcon icon={faRightToBracket} />,
+      icon: <HeaderLogoutIcon width="2rem" height="2rem" />,
       title: 'Log out',
       to: '/logout',
       separate: true,
@@ -132,7 +130,7 @@ function Header() {
             </button>
             <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
             <button className={cx('search-btn')}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <HeaderSearchIcon width="2.4rem" height="2.4rem" />
             </button>
           </div>
         </TippyHeadless>
@@ -145,7 +143,7 @@ function Header() {
               <div className={cx('currentUser')}>
                 <Tippy delay={[0, 200]} content="Inbox" placement="bottom">
                   <button className={cx('action-btn')}>
-                    <FontAwesomeIcon icon={faMessage} />
+                    <MessageIcon />
                   </button>
                 </Tippy>
               </div>
@@ -157,8 +155,8 @@ function Header() {
           )}
           <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
             {currentUser ? (
-              <img
-                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/826a360a92f934a02c77da6f098d1f00~c5_100x100.jpeg?x-expires=1667026800&x-signature=Rcdvan%2FjlVrFzWiQY3EU2gfmswk%3D"
+              <Image
+                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/19bbc8911e34cf615f72050073851b94~c5_100x100.jpeg?x-expires=1667224800&x-signature=tIintavpNoXrqDXs2yAaTO7lBhA%3D"
                 className={cx('user-avatar')}
                 alt="nguyen van a"
               />

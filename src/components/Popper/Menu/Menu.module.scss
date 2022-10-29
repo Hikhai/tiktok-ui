@@ -2,9 +2,10 @@
 .menu-list {
   width: 224px;
   .menu-item {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
-    text-align: start;
     padding-top: 11px;
     padding-bottom: 11px;
     margin-left: 0;
