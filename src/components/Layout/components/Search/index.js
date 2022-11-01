@@ -1,13 +1,16 @@
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import TippyHeadless from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
+
 import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountsItem from '~/components/AccountItem';
 import { HeaderSearchIcon } from '~/components/icons';
-import { useState, useEffect, useRef } from 'react';
+import { useDebounce } from '~/hooks';
+import * as searchServices from '~/apiServices/searchSevices';
 const cx = classNames.bind(styles);
 
 function Search() {
@@ -16,20 +19,20 @@ function Search() {
   const [showResult, setShowResult] = useState(true);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
+  const debounce = useDebounce(searchValue, 700);
   useEffect(() => {
-    if (!searchValue.trim()) {
+    if (!debounce.trim()) {
       setSearchResult([]);
       return;
     }
-    setLoading(true);
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res.data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(true));
-  }, [searchValue]);
+    const fetApi = async () => {
+      setLoading(true);
+      const result = await searchServices.search(debounce);
+      setSearchResult(result);
+      setLoading(false);
+    };
+    fetApi();
+  }, [debounce]);
 
   const handleHideResult = () => {
     setShowResult(false);
@@ -50,7 +53,14 @@ function Search() {
           <PopperWrapper>
             <h4 className={cx('search-title')}>Accounts</h4>
             {searchResult.map((result) => (
-              <AccountsItem key={result.id} data={result} onClick={() => setShowResult(false)} />
+              <AccountsItem
+                key={result.id}
+                data={result}
+                onClick={() => {
+                  setSearchResult([]);
+                  setSearchValue('');
+                }}
+              />
             ))}
           </PopperWrapper>
         </div>
