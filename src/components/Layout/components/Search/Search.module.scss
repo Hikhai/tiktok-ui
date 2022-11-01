@@ -35,8 +35,8 @@
   }
 }
 
-.clear,
-.loading {
+.loading,
+.clear {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -45,6 +45,20 @@
   height: 16px;
   color: #a7a7ab;
   background-color: transparent;
+}
+
+.loading {
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  from {
+    transform: translateY(-50%) rotate(0);
+  }
+
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 .search-btn {

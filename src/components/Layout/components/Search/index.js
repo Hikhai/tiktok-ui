@@ -14,15 +14,32 @@ function Search() {
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [showResult, setShowResult] = useState(true);
+  const [loading, setLoading] = useState(false);
   const inputRef = useRef();
   useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([1, 2, 3, 4, 5]);
-    }, 0);
-  }, []);
+    if (!searchValue.trim()) {
+      setSearchResult([]);
+      return;
+    }
+    setLoading(true);
+    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+      .then((res) => res.json())
+      .then((res) => {
+        setSearchResult(res.data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(true));
+  }, [searchValue]);
 
   const handleHideResult = () => {
     setShowResult(false);
+  };
+  console.log('hello');
+  const handleInput = (e) => {
+    const value = e.target.value;
+    if (value.trim() === '') {
+      setSearchValue('');
+    } else setSearchValue(value);
   };
   return (
     <TippyHeadless
@@ -32,10 +49,9 @@ function Search() {
         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
             <h4 className={cx('search-title')}>Accounts</h4>
-            <AccountsItem />
-            <AccountsItem />
-            <AccountsItem />
-            <AccountsItem />
+            {searchResult.map((result) => (
+              <AccountsItem key={result.id} data={result} onClick={() => setShowResult(false)} />
+            ))}
           </PopperWrapper>
         </div>
       )}
@@ -47,10 +63,10 @@ function Search() {
           value={searchValue}
           placeholder="Search accounts and videos"
           spellCheck={false}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => handleInput(e)}
           onFocus={() => setShowResult(true)}
         />
-        {!!searchValue && (
+        {!!searchValue && !loading && (
           <button>
             <FontAwesomeIcon
               className={cx('clear')}
@@ -63,7 +79,7 @@ function Search() {
             />
           </button>
         )}
-        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+        {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
         <button className={cx('search-btn')}>
           <HeaderSearchIcon width="2.4rem" height="2.4rem" />
         </button>
