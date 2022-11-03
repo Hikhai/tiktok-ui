@@ -7,7 +7,7 @@ import Header from './Header';
 import { useState } from 'react';
 const cx = classNames.bind(styles);
 const defaultFb = () => {};
-function Menu({ children, items = [], onChange = defaultFb }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFb }) {
   const [history, setHistory] = useState([{ data: items }]);
   const currentData = history[history.length - 1];
   const renderItems = () => {
@@ -33,6 +33,7 @@ function Menu({ children, items = [], onChange = defaultFb }) {
     <Tippy
       delay={[0, 400]}
       interactive
+      hideOnClick={hideOnClick}
       offset={[12, 10]}
       placement="bottom-end"
       render={(attrs) => (

@@ -40,10 +40,11 @@ function Search() {
   console.log('hello');
   const handleInput = (e) => {
     const value = e.target.value;
-    if (value.trim() === '') {
-      setSearchValue('');
-    } else setSearchValue(value);
+    if (!value.startsWith(' ')) {
+      setSearchValue(value);
+    }
   };
+  const handleSubmit = (e) => {};
   return (
     <TippyHeadless
       interactive
@@ -90,7 +91,7 @@ function Search() {
           </button>
         )}
         {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-        <button className={cx('search-btn')}>
+        <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
           <HeaderSearchIcon width="2.4rem" height="2.4rem" />
         </button>
       </div>
