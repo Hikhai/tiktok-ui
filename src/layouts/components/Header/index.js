@@ -17,7 +17,7 @@ import {
   MessageIcon,
   HeaderSettingIcon,
   HeaderTiktokIcon,
-} from '~/components/icons';
+} from '~/components/Icons';
 import Image from '~/components/Image';
 import Menu from '~/components/Popper/Menu';
 import Search from '../Search';
