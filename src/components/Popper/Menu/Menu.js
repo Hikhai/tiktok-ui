@@ -8,13 +8,13 @@ import Header from './Header';
 import { useState } from 'react';
 const cx = classNames.bind(styles);
 const defaultFb = () => {};
+
 function Menu({ children, items = [], hideOnClick = false, onChange = defaultFb }) {
   const [history, setHistory] = useState([{ data: items }]);
   const currentData = history[history.length - 1];
   const renderItems = () => {
     return currentData.data.map((item, index) => {
       const isParent = !!item.children;
-
       return (
         <MenuItem
           key={index}
@@ -30,6 +30,24 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFb 
       );
     });
   };
+
+  const handleBack = () => {
+    setHistory((prev) => prev.slice(0, prev.length - 1));
+  };
+
+  const handleResult = (attrs) => (
+    <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+      <PopperWrapper className={cx('menu-popper')}>
+        {history.length > 1 && <Header title={currentData.title} onBack={handleBack} />}
+        <div className={cx('menu-body')}>{renderItems()}</div>
+      </PopperWrapper>
+    </div>
+  );
+
+  const handResetMenu = () => {
+    setHistory((prev) => prev.slice(0, 1));
+  };
+
   return (
     <Tippy
       delay={[0, 400]}
@@ -37,22 +55,8 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFb 
       hideOnClick={hideOnClick}
       offset={[12, 10]}
       placement="bottom-end"
-      render={(attrs) => (
-        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-          <PopperWrapper className={cx('menu-popper')}>
-            {history.length > 1 && (
-              <Header
-                title={currentData.title}
-                onBack={() => {
-                  setHistory((prev) => prev.slice(0, prev.length - 1));
-                }}
-              />
-            )}
-            <div className={cx('menu-body')}>{renderItems()}</div>
-          </PopperWrapper>
-        </div>
-      )}
-      onHidden={() => setHistory((prev) => prev.slice(0, 1))}
+      render={handleResult}
+      onHidden={handResetMenu}
     >
       {children}
     </Tippy>
