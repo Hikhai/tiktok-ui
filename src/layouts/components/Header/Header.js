@@ -8,15 +8,15 @@ import config from '~/config';
 import images from '~/assets/images';
 import Button from '~/components/Button';
 import {
-  HeaderBoardIcon,
-  HeaderLangueIcon,
-  HeaderLogoutIcon,
-  HeaderMovieIcon,
-  HeaderProfileIcon,
-  HeaderQuestionIcon,
+  BoardIcon,
+  LanguageIcon,
+  LogoutIcon,
+  MovieIcon,
+  ProfileIcon,
+  QuestionIcon,
   MessageIcon,
-  HeaderSettingIcon,
-  HeaderTiktokIcon,
+  SettingIcon,
+  TiktokIcon,
 } from '~/components/Icons';
 import Image from '~/components/Image';
 import Menu from '~/components/Popper/Menu';
@@ -25,10 +25,10 @@ import styles from './Header.module.scss';
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
   {
-    icon: <HeaderLangueIcon width="2rem" height="2rem" />,
+    icon: <LanguageIcon width="2rem" height="2rem" />,
     title: 'English',
     children: {
-      title: 'Language',
+      title: 'LanguageIcon',
       data: [
         {
           type: 'language',
@@ -44,12 +44,12 @@ const MENU_ITEMS = [
     },
   },
   {
-    icon: <HeaderQuestionIcon width="2rem" height="2rem" />,
+    icon: <QuestionIcon width="2rem" height="2rem" />,
     title: 'Feedback and help',
     to: '/feedback',
   },
   {
-    icon: <HeaderBoardIcon width="2rem" height="2rem" />,
+    icon: <BoardIcon width="2rem" height="2rem" />,
     title: 'Keyboard shortcuts',
   },
 ];
@@ -59,28 +59,28 @@ function Header() {
 
   const userMenu = [
     {
-      icon: <HeaderProfileIcon width="2rem" height="2rem" />,
+      icon: <ProfileIcon width="2rem" height="2rem" />,
       title: 'View profile',
       to: '/@hoaa',
     },
     {
-      icon: <HeaderTiktokIcon width="2rem" height="2rem" />,
+      icon: <TiktokIcon width="2rem" height="2rem" />,
       title: 'Get coins',
       to: '/coin',
     },
     {
-      icon: <HeaderMovieIcon width="2rem" height="2rem" />,
+      icon: <MovieIcon width="2rem" height="2rem" />,
       title: 'LIVE Studio',
       to: '/studio',
     },
     {
-      icon: <HeaderSettingIcon width="2rem" height="2rem" />,
-      title: 'Settings',
+      icon: <SettingIcon width="2rem" height="2rem" />,
+      title: 'SettingIcons',
       to: '/setting',
     },
     ...MENU_ITEMS,
     {
-      icon: <HeaderLogoutIcon width="2rem" height="2rem" />,
+      icon: <LogoutIcon width="2rem" height="2rem" />,
       title: 'Log out',
       to: '/logout',
       separate: true,
@@ -90,11 +90,11 @@ function Header() {
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
         <Link to={config.routes.home} className={cx('logo')}>
-          <img src={images.logo} alt="Tiktok" />
+          <img src={images.logo} alt="TiktokIcon" />
         </Link>
         <Search />
         <div className={cx('actions')}>
-          <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+          <Button text left={<FontAwesomeIcon icon={faPlus} />}>
             Upload
           </Button>
           {currentUser ? (

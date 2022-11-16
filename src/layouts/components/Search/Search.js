@@ -8,7 +8,7 @@ import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountsItem from '~/components/AccountItem';
-import { HeaderSearchIcon } from '~/components/Icons';
+import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
 import * as searchServices from '~/services/searchSevice';
 const cx = classNames.bind(styles);
@@ -94,7 +94,7 @@ function Search() {
           )}
           {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
           <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
-            <HeaderSearchIcon width="2.4rem" height="2.4rem" />
+            <SearchIcon width="2.4rem" height="2.4rem" />
           </button>
         </div>
       </TippyHeadless>
