@@ -10,7 +10,7 @@ function Sidebar() {
     <aside className={cx('wrapper')}>
       <Menu />
       <SuggestedAccounts label="Suggested accounts" more="See all" />
-      <SuggestedAccounts label="Following accounts" more="See more" />
+      <SuggestedAccounts label="Following accounts" more="See more" preview={false} />
     </aside>
   );
 }

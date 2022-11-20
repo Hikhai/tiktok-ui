@@ -6,13 +6,13 @@ import AccountItem from './AccountItem';
 
 const cx = classNames.bind(styles);
 
-function SuggestedAccounts({ label, more }) {
+function SuggestedAccounts({ label, more, preview = true }) {
   return (
     <div className={cx('wrapper')}>
       <p className={cx('label')}>{label}</p>
-      <AccountItem />
-      <AccountItem />
-      <AccountItem />
+      <AccountItem preview={preview} />
+      <AccountItem preview={preview} />
+      <AccountItem preview={preview} />
       <div className={cx('more-btn')}>
         <p>{more}</p>
       </div>
