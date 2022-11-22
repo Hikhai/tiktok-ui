@@ -1,4 +1,30 @@
 .wrapper {
+  position: fixed;
+  top: var(--default-layout-header-height);
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: overlay;
   width: var(--default-layout-sidebar-width);
   padding: 20px 0 26px 8px;
+  &::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 3px;
+    display: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(22, 24, 35, 0.06);
+  }
+  &:hover::-webkit-scrollbar {
+    display: block;
+  }
+}
+
+.scrollbar {
+  position: absolute;
+  right: 0;
+  top: 0px;
+  width: 6px;
+  height: 25%;
+  border-radius: 3px;
+  background: rgba(22, 24, 35, 0.06);
 }

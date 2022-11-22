@@ -1,0 +1,32 @@
+.wrapper {
+  padding-top: 16px;
+  padding-left: 8px;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.list + .list {
+  margin-top: 8px;
+}
+
+.item {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 17px;
+  margin-top: 8px;
+  display: inline-block;
+  span {
+    opacity: 0.5;
+  }
+  &:hover span {
+    text-decoration: underline;
+  }
+}
+
+.item + .item {
+  margin-left: 4px;
+}

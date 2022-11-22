@@ -1,10 +1,9 @@
 import * as httpRequest from '~/utils/httpRequest';
-export const search = async (q, type = 'less') => {
+const followingService = async (page) => {
   try {
-    const res = await httpRequest.get('/users/search', {
+    const res = await httpRequest.get('me/followings', {
       params: {
-        q,
-        type,
+        page,
       },
     });
     return res.data;
@@ -12,5 +11,7 @@ export const search = async (q, type = 'less') => {
     console.log(error);
   }
 };
+
+export default followingService;
 
 // https://tiktok.fullstack.edu.vn/api/users/suggested?page=1&per_page=5

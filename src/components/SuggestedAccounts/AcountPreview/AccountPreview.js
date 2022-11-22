@@ -1,6 +1,5 @@
 // import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import Tippy from '@tippyjs/react/headless';
 import { Wrapper } from '~/components/Popper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
@@ -11,43 +10,32 @@ import Button from '~/components/Button';
 
 const cx = classNames.bind(styles);
 
-function AccountPreview({ children }) {
-  const handlePreview = (attrs) => (
+function AccountPreview({ attrs, data }) {
+  return (
     <div {...attrs}>
       <Wrapper className={cx('wrapper')}>
         <div className={cx('header')}>
-          <Image
-            className={cx('avatar')}
-            src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-aiso/65d3c6b1d1e205c75536ccf1f26d552d~c5_100x100.jpeg?x-expires=1668873600&x-signature=ujASOsvSeopr242ucMf0JWvqWO4%3D"
-            alt=""
-          />
+          <Image className={cx('avatar')} src={data.avatar} alt={data.nickname} />
           <Button primary className={cx('btn')}>
             Follow
           </Button>
         </div>
         <div className={cx('body')}>
           <a className={cx('nickname')}>
-            <strong>theanh28entertainment</strong>
-            <FontAwesomeIcon className={cx('icon')} icon={faCheckCircle} />
+            <strong>{data.nickname}</strong>
+            {data.tick && <FontAwesomeIcon className={cx('icon')} icon={faCheckCircle} />}
           </a>
           <a className={cx('name')}>
-            <strong>Theanh28 Entertainment</strong>
+            <strong>{data.first_name + ' ' + data.last_name}</strong>
           </a>
           <div className={cx('parameter')}>
-            <span className={cx('follow-count')}>8M</span>
+            <span className={cx('follow-count')}>{data.followers_count}</span>
             <span className={cx('follow')}>Follower</span>
-            <span className={cx('like-count')}>580.3M</span>
+            <span className={cx('like-count')}>{data.likes_count}</span>
             <span className={cx('like')}>Likes</span>
           </div>
         </div>
       </Wrapper>
-    </div>
-  );
-  return (
-    <div>
-      <Tippy interactive offset={[-16, 4]} delay={[800, 400]} placement="bottom-start" render={handlePreview}>
-        {children}
-      </Tippy>
     </div>
   );
 }
